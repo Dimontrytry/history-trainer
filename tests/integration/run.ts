@@ -513,5 +513,12 @@ async function run() {
 }
 run().catch((error) => {
   console.error(error);
+  if (process.env.GITHUB_ACTIONS === "true") {
+    const message = String(error?.stack ?? error)
+      .replace(/%/g, "%25")
+      .replace(/\r/g, "%0D")
+      .replace(/\n/g, "%0A");
+    console.log(`::error title=Integration failure::${message}`);
+  }
   process.exitCode = 1;
 });

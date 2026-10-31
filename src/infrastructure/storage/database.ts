@@ -45,7 +45,8 @@ CREATE TRIGGER item_search_update AFTER UPDATE OF title,description ON items BEG
 export function durableJson(path: string, value: unknown): void {
   const tmp = path + "." + randomUUID() + ".tmp";
   writeFileSync(tmp, JSON.stringify(value));
-  const fd = openSync(tmp, "r");
+  // FlushFileBuffers on Windows requires a handle with GENERIC_WRITE access.
+  const fd = openSync(tmp, "r+");
   try {
     fsyncSync(fd);
   } finally {
