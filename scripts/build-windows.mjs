@@ -6,7 +6,14 @@ const log = createWriteStream("test-results/windows-build.log");
 let tail = "";
 const child = spawn(
   process.execPath,
-  ["node_modules/electron-builder/cli.js", "--win", "nsis", "--x64"],
+  [
+    "node_modules/electron-builder/cli.js",
+    "--win",
+    "nsis",
+    "--x64",
+    "--publish",
+    "never",
+  ],
   { env: process.env, stdio: ["ignore", "pipe", "pipe"] },
 );
 function capture(data, output) {
