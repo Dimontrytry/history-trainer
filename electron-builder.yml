@@ -1,0 +1,24 @@
+appId: org.historytrainer.desktop
+productName: HistoryTrainer
+npmRebuild: false
+directories:
+  output: dist
+files:
+  - out/**
+  - '!out/main/integration.js'
+  - package.json
+asarUnpack:
+  - '**/*.node'
+  - '**/sharp/**'
+  - '**/@img/**'
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  artifactName: HistoryTrainer-${version}-win-x64.${ext}
+nsis:
+  installerLanguages: [ru_RU]
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
